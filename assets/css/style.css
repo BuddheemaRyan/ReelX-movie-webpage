@@ -43,3 +43,12 @@
     color: #ef4444 !important;
     font-weight: 600;
 }
+.search-card {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.search-card:hover {
+    border-color: #4b5563;
+    transform: translateY(-2px);
+}

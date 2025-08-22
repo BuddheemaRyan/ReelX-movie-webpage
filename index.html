@@ -59,6 +59,56 @@
             </div>
         </div>
     </section>
+    
+
+    <section id="search" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Search Movies</h2>
+                   
+            <div class="max-w-4xl mx-auto space-y-8">
+                
+                <div class="search-card bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-search text-red-500 mr-2"></i>Search by Title
+                    </h3>
+                    <div class="flex gap-4">
+                        <input type="text" id="title-search" placeholder="Enter movie title..." 
+                               class="flex-1 px-4 py-3 bg-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <button id="title-search-btn" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg transition-colors">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                
+                <div class="search-card bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-tags text-blue-500 mr-2"></i>Search by Keyword
+                    </h3>
+                    <div class="flex gap-4">
+                        <input type="text" id="keyword-search" placeholder="Enter keywords (e.g., batman, love, war)..." 
+                               class="flex-1 px-4 py-3 bg-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="keyword-search-btn" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-card bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-id-card text-yellow-500 mr-2"></i>Search by IMDb ID
+                    </h3>
+                    <div class="flex gap-4">
+                        <input type="text" id="imdb-search" placeholder="Enter IMDb ID (e.g., tt0111161)..." 
+                               class="flex-1 px-4 py-3 bg-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <button id="imdb-search-btn" class="bg-yellow-600 hover:bg-yellow-700 px-6 py-3 rounded-lg transition-colors">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> 
 </body>
