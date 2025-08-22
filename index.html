@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReelX - Movie discovery platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+   <nav class="bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-film text-red-500 text-2xl"></i>
+                    <h1 class="text-2xl font-bold text-white">ReelX</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-red-500 transition-colors">Home</a>
+                    <a href="#search" class="nav-link text-gray-300 hover:text-white transition-colors">Search</a>
+                    <a href="#discover" class="nav-link text-gray-300 hover:text-white transition-colors">Discover</a>
+                    <a href="#top-rated" class="nav-link text-gray-300 hover:text-white transition-colors">Top Rated</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <a href="#home" class="block py-2 text-gray-300 hover:text-red">Home</a>
+                <a href="#search" class="block py-2 text-gray-300 hover:text-white">Search</a>
+                <a href="#discover" class="block py-2 text-gray-300 hover:text-white">Discover</a>
+                <a href="#top-rated" class="block py-2 text-gray-300 hover:text-white">Top Rated</a>
+            </div>
+        </div>
+    </nav>
+
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> 
+</body>
+</html>
