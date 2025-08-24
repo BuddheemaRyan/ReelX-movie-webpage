@@ -194,7 +194,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -211,4 +211,49 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
 }
+.nav-link.active {
+    color: #ef4444 !important;
+    font-weight: 600;
+}
+input:focus, button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+.loading-card {
+    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+.error-message {
+    background: #7f1d1d;
+    border: 1px solid #dc2626;
+    color: #fca5a5;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem 0;
+}
+.success-message {
+    background: #064e3b;
+    border: 1px solid #059669;
+    color: #6ee7b7;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem 0;
+}
+.poster-placeholder {
+    background: linear-gradient(135deg, #374151, #4b5563);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 3rem;
+}
+
     
