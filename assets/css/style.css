@@ -175,21 +175,6 @@ input:focus, button:focus {
         transform: translateX(0);
     }
 }
-
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .modal-poster {
-        width: 100%;
-        height: 300px;
-    }
-    
-    .movie-poster {
-        height: 250px;
-    }
-}
 html {
     scroll-behavior: smooth;
 }
@@ -255,5 +240,35 @@ input:focus, button:focus {
     color: #9ca3af;
     font-size: 3rem;
 }
+.genre-tag {
+    background: #4b5563;
+    color: #e5e7eb;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin: 0.25rem;
+    display: inline-block;
+}
+.rating-stars {
+    color: #f59e0b;
+    font-size: 1.2rem;
+}
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}   
 
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
     
+    .modal-poster {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .movie-poster {
+        height: 250px;
+    }
+}
