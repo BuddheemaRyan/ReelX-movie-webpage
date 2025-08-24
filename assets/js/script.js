@@ -25,4 +25,39 @@ class MovieApp{
         this.loadtopRatedMovies();
         this.setupNavigation();
     }
+    setupEventListener(){
+        document.getElementById('title-search-btn').addEventListener('click',() =>this.searchByTitle());
+        document.getElementById('keyword-search-btn').addEventListener('click',() =>this.searchByKeyword());
+        document.getElementById('imdb-search-btn').addEventListener('click',() =>this.searchByImdbId());
+
+        document.getElementById('title-search').addEventListener('keypress',(e)=>{
+            if(e.key ==='Enter')this.searchByTitle();
+        });
+        document.getElementById('keyword-search').addEventListener('keypress',(e) =>{
+            if(e.key === 'Enter') this.searchByKeyword();
+        });
+        document.getElementById('imdb-search').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') this.searchByImdbId();
+        });
+
+        document.getElementById('discover-btn').addEventListener('click', () => this.discoverRandomMovie());
+        document.getElementById('hero-discover-btn').addEventListener('click', () => this.discoverRandomMovie());
+        document.getElementById('hero-search-btn').addEventListener('click', () => {
+            document.getElementById('search').scrollIntoView({behavior: 'smooth'});
+        });
+
+        document.getElementById('close-model').addEventListener('click', () =>this.closeModel);
+        document.getElementById('movie-model').addEventListener('click', (e) =>{
+            if(e.target.id === 'movie-model') this.closeModel();
+        });
+
+        document.getElementById('clear-results').addEventListener('click', () => this.clearResults());
+        document.getElementById('load-more-btn').addEventListener('click', () => this.loadMoreResults());
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => this.toggleMobileMenu());
+
+        document.addEventListener('keydown',(e) => {
+            if(e.key === 'Escape') this.closeModel();
+        })
+    }
+    
 }
