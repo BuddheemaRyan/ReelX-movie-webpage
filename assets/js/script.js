@@ -117,7 +117,7 @@ class MovieApp{
         this.showLoading();
         try{
             const movie= await this.fetchMovieById(imdbId);
-            if(movie && movie.Response !== 'false'){
+            if(movie && movie.Response !== 'False'){
                 this.showMovieDetails(movie);
             }else{
                 this.showToast('Movie not found with this IMDB ID', 'error');
@@ -128,4 +128,33 @@ class MovieApp{
             this.hideLoading();
         }
     }
+    async performSearch(query, type){
+        this.showLoading();
+
+        try{
+            const results= await this.fetchMovies(query, this.currentPage);
+
+            if(results && results.Response !== 'False' && results.search){
+                this .displaySearchResults(results.search, `${type.charAt(0).toUpperCase() + type.slice(1)} Result for "${query}"`);
+
+                const totalResults =parseInt(results.totalResults);
+                const currentResults= this.currentPage*10;
+                if(currentResults< totalResults){
+                    document.getElementById('load-more-container').classList.remove('hidden');
+                }else{
+                    document.getElementById('load-more-container').classList.add('hidden');
+                }
+                this.showToast(`Found ${totalResults} result `, 'success');
+            }else{
+                this.showToast('No movies Found', ' error');
+                this.clearResults();
+            }
+        }catch(error){
+                this.showToast('Errow searching for movies', 'error');
+                this.clearResults();
+        }finally{
+            this.hideLoading();
+        }
+    }
+
 }
