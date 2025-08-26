@@ -89,7 +89,43 @@ class MovieApp{
                 }
             });
         });
+    }
 
+    toggleMobileMenu(){
+        const mobileMenu= document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
     }
     
+    async searchByTitle(){
+        const query= document.getElementById('title-search').value.trim();
+        if(!query){
+            this.showToast('please enter movie title', 'error');
+            return;
+        }
+
+        this.currentSearch=query;
+        this.currentSearchType='title';
+        this.currentPage=1;
+         await this.performSearch(query,'title');
+    }
+    async searchByImdbId(){
+        const imdbId=document.getElementById('imdb-search').value.trim();
+        if(!imdbId){
+            this.showToast('please enter an IMDB ID', 'error');
+            return;
+        }
+        this.showLoading();
+        try{
+            const movie= await this.fetchMovieById(imdbId);
+            if(movie && movie.Response !== 'false'){
+                this.showMovieDetails(movie);
+            }else{
+                this.showToast('Movie not found with this IMDB ID', 'error');
+            }
+        }catch(error){
+            this.showToast('Error fetching movie details','error');
+        }finally{
+            this.hideLoading();
+        }
+    }
 }
