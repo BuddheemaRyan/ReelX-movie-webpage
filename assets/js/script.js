@@ -156,5 +156,57 @@ class MovieApp{
             this.hideLoading();
         }
     }
+    async loadMoreResults(){
+        if(!this.currentSearch){
+            return;
+        }
+        this.currentPage++;
+        this.showLoading();
+
+        try{
+            const results= await this.fetchMovies(this.currentSearch, this.currentPage);
+             if(results && results.Response !== 'False' && results.search){
+                this.appendSearchResults(results.search);
+              
+                const totalResults=parseInt(results.totalResults);
+                const currentResults=this.currentPage*10;
+
+                if(currentResults >= totalResults){
+                    document.getElementById('load-more-container').classList.add('hidden');
+                    this.showToast('No more result to load', 'warning');
+                }
+             }
+        }catch(error){
+                this.showToast('Error loading more results','error');
+        }finally{
+            this.hideLoading();
+        }
+    }
+
+    async discoverRandomMovie(){
+        const randomKeyword= this.randomMovieKeywords[Math.floor(Math.random()* this.randomMovieKeywords.length)];
+        this.showLoading();
+
+        try{
+            const results= await this.fetchMovies(randomKeyword,1);
+            if(results && results.Response !== 'False' && results.search && results.search.length>0){
+                const randomMovie= results.search[Math.floor(Math.random()*results.search.length)];
+                const movieDetails= await this.fetchMovieById(randomMovie.imdbID);
+
+                if(movieDetails && movieDetails.Response !== 'False'){
+                    this.showMovieDetails(movieDetails);
+                    this.showToast('Discovered a random movie fr you!','sucsess');
+                }else{
+                    this.showToast('Error loading movie details', 'error');
+                }
+            }else{
+                this.showToast('Could not discover a movie right now','error');
+            }
+        }catch(error){
+            this.showToast('Error discovering movie right now','error');
+        }finally{
+            this.hideLoading();
+        }
+    }
 
 }
