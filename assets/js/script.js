@@ -59,5 +59,37 @@ class MovieApp{
             if(e.key === 'Escape') this.closeModel();
         })
     }
+
+    setupNavigation(){
+        const navLinks=document.querySelector('.nav-link');
+        navLinks.forEach(link =>{
+            link.addEventListener('click,', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement= document.getElementById(targetId);
+                if(targetElement){
+                    targetElement.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+        window.addEventListener('scroll', () =>{
+            let current = '';
+            const sections= document.querySelector('section[id]');
+
+            sections.forEach(section =>{
+                const sectionTop= section.offsetTop-100;
+                if(window.pageYOffset >= sectionTop){
+                    current = section.getAttribute(' id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`){
+                    link.classList.add('active');
+                }
+            });
+        });
+
+    }
     
 }
