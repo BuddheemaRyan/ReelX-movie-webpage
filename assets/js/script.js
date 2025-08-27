@@ -246,4 +246,35 @@ class MovieApp{
         return await respone.json();
     }
 
+    getDemoSearchResults(){
+        const demoMovies =[
+            {
+                Title: "The Dark Knight",
+                Year: "2008",
+                imdbID:"tt0468569",
+                Type: "movie",
+                Poster: "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop"
+            },
+            {
+                Title:"Inception",
+                Year:"2010",
+                imdbID:"tt1375666",
+                Type:"movie",
+                Poster: "https://images.pexels.com/photos/7991580/pexels-photo-7991580.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop"               
+            },
+            {
+                Title:"INtersteller",
+                Year:"2014",
+                imdbID:"tt0816692",
+                movie:"movie",
+                Poster: "https://images.pexels.com/photos/7991580/pexels-photo-7991580.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop"                
+            }
+        ];
+        return{
+            Search: demoMovies,
+            totalResults: "3",
+            Response: "True"
+        };
+    }
+
 }
