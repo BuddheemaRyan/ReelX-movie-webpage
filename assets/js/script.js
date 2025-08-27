@@ -340,5 +340,57 @@ class MovieApp{
         resultsGrid.insertAdjacentHTML('beforeend', newCards);
         this.attachMovieCardListeners();
     }
+    createMovieCard(movie) {
+        const poster = movie.Poster && movie.Poster !== 'N/A' 
+            ? movie.Poster 
+            : 'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop';
+        
+        return `
+            <div class="movie-card" data-imdb-id="${movie.imdbID}">
+                <div class="relative overflow-hidden">
+                    <img src="${poster}" alt="${movie.Title}" class="movie-poster" loading="lazy">
+                    <div class="absolute top-2 right-2">
+                        <span class="movie-type">${movie.Type}</span>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">${movie.Title}</h3>
+                    <p class="movie-year">${movie.Year}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    createLoadingCards(count) {
+        return Array(count).fill().map(() => `
+            <div class="loading-card h-80 rounded-lg"></div>
+        `).join('');
+    }
+
+    attachMovieCardListeners() {
+        const movieCards = document.querySelectorAll('.movie-card');
+        movieCards.forEach(card => {
+            card.addEventListener('click', async () => {
+                const imdbId = card.dataset.imdbId;
+                await this.loadMovieDetails(imdbId);
+            });
+        });
+    }
+     async loadMovieDetails(imdbId) {
+        this.showLoading();
+        
+        try {
+            const movie = await this.fetchMovieById(imdbId);
+            if (movie && movie.Response !== 'False') {
+                this.showMovieDetails(movie);
+            } else {
+                this.showToast('Error loading movie details', 'error');
+            }
+        } catch (error) {
+            this.showToast('Error loading movie details', 'error');
+        } finally {
+            this.hideLoading();
+        }
+    }
 
 }
