@@ -208,5 +208,42 @@ class MovieApp{
             this.hideLoading();
         }
     }
+    async loadtopRatedMovies(){
+        const topRatedGrid = document.getElementById('top-rated-grid');
+        topRatedGrid.innerHTML = this.createLoadingCards(8);
+
+        try{
+            const moviePromises = this.topRatedMovies.slice(0,8).map(id => this.fetchMovieById(id));
+            const movies= await Promise.all(moviePromises);
+            const validMovies = movies.filter(movie => movie && movie.Response !== 'False');
+
+            if(validMovies.length > 0){
+                topRatedGrid.innerHTML = validMovies.map(movie => this.createMovieCard(movie)).join('');
+                this.attachMovieCardListeners();
+            }else{
+                topRatedGrid.innerHTML = '<p class="col-span-full text-center text-gray-400">Unable to load top rated movies</p>';
+            }
+        }catch(error){
+            topRatedGrid.innerHTML= '<p class="col-span-full text-center text-gray-400">Error loading top rated movies</p>';
+        }
+    }
+
+    async fetchMovies(){
+        if(this.apiKey === '89d7f57b'){
+            return this.getDemoSearchResults(query);
+        }
+        const url = `${this.baseUrl}?apikey=${this.apiKey}&s=${encodeURIComponent(query)}&page=${page}`;
+        const response = await fetch(url);
+        return await response.json();
+    }
+
+    async fetchMovieById(imdbId){
+        if(this. apiKey === '89d7f57b'){
+            return this.getDemoMovieDetails(imdbId);
+        }
+        const url= `${this.baseUrl}?apikey=${this.apiKey}&i=${imdbId}&plot=full`;
+        const respone= await ferch(url);
+        return await respone.json();
+    }
 
 }
