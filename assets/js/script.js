@@ -321,8 +321,24 @@ class MovieApp{
             Poster: "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop",
             imdbRating: "8.5",
             Response: "True"
-        };
-        
+        };        
+    }
+    displaySearchResults(movies, title){
+        const resultsSection = document.getElementById('results-section');
+        const resultsTitle= document.getElementById('results-title');
+        const  resultsGrid = document.getElementById('results-grid');
+
+        resultsTitle.textContent =title;
+        resultsGrid.innerHTML= movies.map(movie => this.createMovieCard(movie)).join('');
+        resultsSection.classList.remove('hidden');
+        this.attachMovieCardListeners();
+        resultsSection.scrollIntoView({ behavior: 'smooth'});
+    }
+    appendSearchResults(movies){
+        const resultsGrid = document.getElementById('results-grid');
+        const newCards= movies.map(movie => this.createMovieCard(movie)).join('');
+        resultsGrid.insertAdjacentHTML('beforeend', newCards);
+        this.attachMovieCardListeners();
     }
 
 }
