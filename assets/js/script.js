@@ -392,5 +392,86 @@ class MovieApp{
             this.hideLoading();
         }
     }
+    showMovieDetails(movie) {
+        const modal = document.getElementById('movie-modal');
+        const detailsContainer = document.getElementById('movie-details');
+        
+        const poster = movie.Poster && movie.Poster !== 'N/A' 
+            ? movie.Poster 
+            : 'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=450&fit=crop';
+        
+        const rating = movie.imdbRating && movie.imdbRating !== 'N/A' ? movie.imdbRating : 'N/A';
+        const genres = movie.Genre ? movie.Genre.split(', ').map(genre => 
+            `<span class="genre-tag">${genre}</span>`
+        ).join('') : '';
+        
+        detailsContainer.innerHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <img src="${poster}" alt="${movie.Title}" class="modal-poster w-full">
+                    <div class="mt-4 text-center">
+                        <div class="rating-badge">
+                            <i class="fas fa-star"></i>
+                            <span>${rating}/10</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">${movie.Title}</h1>
+                        <div class="flex flex-wrap items-center gap-4 text-gray-300 mb-4">
+                            <span>${movie.Year}</span>
+                            <span>•</span>
+                            <span>${movie.Runtime || 'N/A'}</span>
+                            <span>•</span>
+                            <span>${movie.Rated || 'N/A'}</span>
+                        </div>
+                        <div class="mb-4">
+                            ${genres}
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="detail-item">
+                            <div class="detail-label">Director</div>
+                            <div class="detail-value">${movie.Director || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Released</div>
+                            <div class="detail-value">${movie.Released || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Box Office</div>
+                            <div class="detail-value">${movie.BoxOffice || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">IMDb Votes</div>
+                            <div class="detail-value">${movie.imdbVotes || 'N/A'}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Cast</div>
+                        <div class="detail-value">${movie.Actors || 'N/A'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Plot</div>
+                        <div class="detail-value">${movie.Plot || 'No plot available.'}</div>
+                    </div>
+                    
+                    ${movie.Awards && movie.Awards !== 'N/A' ? `
+                        <div class="detail-item">
+                            <div class="detail-label">Awards</div>
+                            <div class="detail-value">${movie.Awards}</div>
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+        
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 
 }
