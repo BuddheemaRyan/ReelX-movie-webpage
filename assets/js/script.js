@@ -473,5 +473,57 @@ class MovieApp{
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
+    closeModal() {
+        const modal = document.getElementById('movie-modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
 
+    clearResults() {
+        const resultsSection = document.getElementById('results-section');
+        const resultsGrid = document.getElementById('results-grid');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        
+        resultsSection.classList.add('hidden');
+        resultsGrid.innerHTML = '';
+        loadMoreContainer.classList.add('hidden');
+        
+        this.currentSearch = '';
+        this.currentSearchType = '';
+        this.currentPage = 1;
+    }
+
+    showLoading() {
+        document.getElementById('loading').classList.remove('hidden');
+    }
+
+    hideLoading() {
+        document.getElementById('loading').classList.add('hidden');
+    }
+
+    showToast(message, type = 'success', duration = 3000) {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icon = type === 'success' ? 'check-circle' : 
+                    type === 'error' ? 'exclamation-circle' : 
+                    'exclamation-triangle';
+        
+        toast.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-${icon} mr-2"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, duration);
+    }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    new MovieApp();
+});
